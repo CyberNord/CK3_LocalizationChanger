@@ -18,10 +18,10 @@ for file in list(INPUT_DIR.rglob("*.yml*")):
     newfileName = filename.replace(PATTERN, REPLACE_WITH)
 
     # replace text in file
-    with open(file, 'r') as f_r:
-        file_data = f_r.read()
-        file_data = file_data.replace(PATTERN, REPLACE_WITH)
-    with open(file, 'w') as f_r:
+    with open(file, 'r', encoding="utf-8") as f_r:
+        file_data = f_r.readlines()
+        file_data[0] = file_data[0].replace(PATTERN, REPLACE_WITH)
+    with open(file, 'w', encoding="utf-8") as f_r:
         f_r.write(file_data)
 
     # rename File
