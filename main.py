@@ -22,7 +22,7 @@ for file in list(INPUT_DIR.rglob("*.yml*")):
         file_data = f_r.readlines()
         file_data[0] = file_data[0].replace(PATTERN, REPLACE_WITH)
     with open(file, 'w', encoding="utf-8") as f_r:
-        f_r.write(file_data)
+        f_r.writelines(file_data)
 
     # rename File
     old_file = os.path.join(filepath, filename)
