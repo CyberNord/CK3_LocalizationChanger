@@ -8,14 +8,13 @@ from googletrans import Translator
 FOLDER = "db\\english\\"
 PATTERN = "english"
 REPLACE_WITH = "german"
+do_translation = True       # translation will take time as API demands timeouts..
 translator = Translator()
 RE_PATTERN = re.compile(r'(?:\[[^"\]]*\])|(?:\$[^$]+\$)|(?:\#[^$]+\#)')
 REPLACER = '@ '
-maxTranslatorCalls = 10                # too many calls will stop api --> A rest is needed
 # ---------------------------------------------------
 
 INPUT_DIR = Path.cwd() / FOLDER
-translationCycles = 0
 totalCount = 0
 
 
@@ -28,42 +27,42 @@ for file in list(INPUT_DIR.rglob("*.yml*")):
 
     # replace text in file
     with open(file, 'r', encoding="utf-8") as f_r:
+        print("current File: " + file.name)
         file_data = f_r.readlines()
         file_data[0] = file_data[0].replace(PATTERN, REPLACE_WITH)
 
-        #  basic Translator in work
-        for i, lines in enumerate(file_data[1:]):
-            matches = re.findall('"([^"]*)"', lines)
-            print(matches)
-            if len(matches) == 1 and matches is not None:
-                tokens = re.findall(RE_PATTERN, matches[0])
-                print(tokens)
-
-                match = matches[0]
-                matches[0] = re.sub(RE_PATTERN, REPLACER, matches[0])
+        if do_translation:
+            #  basic Translator in work
+            for i, lines in enumerate(file_data[1:]):
+                matches = re.findall('"([^"]*)"', lines)
                 print(matches)
+                if len(matches) == 1 and matches is not None:
+                    tokens = re.findall(RE_PATTERN, matches[0])
+                    print(tokens)
 
-                # translate
-                if translationCycles > 0:
-                    print("Waiting for API.")
-                    for j in range(1, 0, -1):
+                    match = matches[0]
+                    matches[0] = re.sub(RE_PATTERN, REPLACER, matches[0])
+                    print(matches)
+
+                    # timeout is needed otherwise api will block usage
+                    print("Timeout API.")
+                    for j in range(2, 0, -1):
                         print(j, end="...")
                         time.sleep(1)
-                    translationCycles = 0
                     print("resuming")
 
-                translation = translator.translate(matches[0], dest='de', src='en')
-                translationCycles += 1
-                totalCount += 1
-                padded_translation = translation.text
-                for t in tokens:
-                    padded_translation = padded_translation.replace(REPLACER, t, 1)
-                print(translation.text)
-                print(padded_translation)
-                file_data[i+1] = lines.replace(match, padded_translation, 1)
-                print(lines)
-                print("#" + str(totalCount))
-            print()
+                    # translate
+                    translation = translator.translate(matches[0], dest='de', src='en')
+                    totalCount += 1
+                    padded_translation = translation.text
+                    for t in tokens:
+                        padded_translation = padded_translation.replace(REPLACER, t, 1)
+                    print(translation.text)
+                    print(padded_translation)
+                    file_data[i+1] = lines.replace(match, padded_translation, 1)
+                    print(file_data[i+1])
+                    print("#" + str(totalCount))
+                print()
 
     old_file = os.path.join(filepath, filename)
     newfileName = filename.replace(PATTERN, REPLACE_WITH, 1)
