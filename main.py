@@ -11,7 +11,8 @@ PATTERN = "english"
 REPLACE_WITH = "german"
 do_translation = True       # translation will take time as API demands timeouts..
 translator = Translator()
-RE_PATTERN = re.compile(r'(?:\[[^"\]]*\])|(?:\$[^$]+\$)|(?:\#[^$]+\#)')
+# RE_PATTERN = re.compile(r'(?:\[[^"\]]*\])|(?:\$[^$]+\$)|(?:\#[^$]+\#)')       # old version
+RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#')
 REPLACER = '#'
 # ---------------------------------------------------
 
