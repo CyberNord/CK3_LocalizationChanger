@@ -6,13 +6,18 @@ from googletrans import Translator
 
 # ---------------------------------------------------
 FOLDER = "db\\english\\"
+# FOLDER = "db\\testset\\"
 PATTERN = "english"
 REPLACE_WITH = "german"
 do_translation = True       # translation will take time as API demands timeouts..
 translator = Translator()
 RE_PATTERN = re.compile(r'(?:\[[^"\]]*\])|(?:\$[^$]+\$)|(?:\#[^$]+\#)')
-REPLACER = '@ '
+REPLACER = '#'
 # ---------------------------------------------------
+
+# TODO
+# |/[\\n]+/     Regex for Newline missing
+# REPLACER      find optimal symbol
 
 INPUT_DIR = Path.cwd() / FOLDER
 totalCount = 0
@@ -73,5 +78,5 @@ for file in list(INPUT_DIR.rglob("*.yml*")):
     if not os.path.exists(new_filepath):
         os.makedirs(new_filepath)
 
-    with open(new_path, 'w', encoding="utf-8") as f_r:
+    with open(new_path, 'w', encoding="utf-8-sig") as f_r:
         f_r.writelines(file_data)
