@@ -8,7 +8,7 @@ from googletrans import Translator
 FOLDER = "db\\english\\"
 PATTERN = "english"
 REPLACE_WITH = "german"
-do_translation = True       # translation will take time as API demands timeouts..
+do_translation = True  # translation will take time as API demands timeouts..
 translator = Translator()
 RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
 REPLACER = '{@}'
@@ -16,7 +16,6 @@ REPLACER = '{@}'
 
 INPUT_DIR = Path.cwd() / FOLDER
 totalCount = 0
-
 
 file: Path
 for file in list(INPUT_DIR.rglob("*.yml*")):
@@ -52,16 +51,22 @@ for file in list(INPUT_DIR.rglob("*.yml*")):
                     print("resuming")
 
                     # translate
-                    translation = translator.translate(matches[0], dest='de', src='en')
+                    try:
+                        translation = translator.translate(matches[0], dest='de', src='en')
+                        padded_translation = translation.text
+                    except TypeError:
+                        translation = matches[0]
+                        padded_translation = matches[0]
+                        print('Error Skiped in: ' + matches[0])
                     totalCount += 1
-                    padded_translation = translation.text
+
+                    print(padded_translation)
                     for t in tokens:
                         padded_translation = padded_translation.replace(REPLACER, t, 1)
 
-                    print(translation.text)
                     print(padded_translation)
-                    file_data[i+1] = lines.replace(match, padded_translation, 1)
-                    print(file_data[i+1])
+                    file_data[i + 1] = lines.replace(match, padded_translation, 1)
+                    print(file_data[i + 1])
                     print("#" + str(totalCount))
                 print()
 
