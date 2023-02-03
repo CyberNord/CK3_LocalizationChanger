@@ -10,13 +10,9 @@ PATTERN = "english"
 REPLACE_WITH = "german"
 do_translation = True       # translation will take time as API demands timeouts..
 translator = Translator()
-RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|"\\n')
+RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
 REPLACER = '{@}'
 # ---------------------------------------------------
-
-# TODO
-# |/[\\n]+/     Regex for Newline missing
-# REPLACER      find optimal symbol
 
 INPUT_DIR = Path.cwd() / FOLDER
 totalCount = 0
@@ -61,6 +57,7 @@ for file in list(INPUT_DIR.rglob("*.yml*")):
                     padded_translation = translation.text
                     for t in tokens:
                         padded_translation = padded_translation.replace(REPLACER, t, 1)
+
                     print(translation.text)
                     print(padded_translation)
                     file_data[i+1] = lines.replace(match, padded_translation, 1)
