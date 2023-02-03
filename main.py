@@ -20,7 +20,7 @@ def parseargs():
     parser.add_argument("-trans", type=int, default=1)
     parser.add_argument("path")
 
-    args = parser.parse_args()
+    args = parser.parse_args( )
     fromlanguage = args.l1
     tolanguage = args.l2
     if args.trans == 1:
