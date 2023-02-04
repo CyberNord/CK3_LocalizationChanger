@@ -20,7 +20,7 @@ def parseargs():
     parser.add_argument("-trans", type=int, default=1)
     parser.add_argument("path")
 
-    args = parser.parse_args( )
+    args = parser.parse_args()
     fromlanguage = args.l1
     tolanguage = args.l2
     if args.trans == 1:
@@ -32,7 +32,7 @@ def parseargs():
     if not target_dir.exists():
         print("The target directory doesn't exist")
         raise SystemExit(1)
-    init(target_dir, do_translation,fromlanguage,tolanguage)
+    init(target_dir, do_translation, fromlanguage, tolanguage)
 
 
 def init(target_dir, do_translation, fromlanguage, tolanguage):
@@ -51,6 +51,7 @@ def init(target_dir, do_translation, fromlanguage, tolanguage):
         with open(file, 'r', encoding="utf-8") as f_r:
             print("current File: " + file.name)
             file_data = f_r.readlines()
+            # file_data = yaml.safe_load(f_r)
             file_data[0] = file_data[0].replace(PATTERN, REPLACE_WITH)
             if do_translation:
                 translate(file_data, totalCount, fromlanguage, tolanguage)
@@ -68,7 +69,7 @@ def tofile(filepath, filename, file_data):
     if not os.path.exists(new_filepath):
         os.makedirs(new_filepath)
 
-    with open(new_path, 'w', encoding="utf-8-sig") as f_r:
+    with open(new_path, 'w', encoding="utf-8") as f_r:
         f_r.writelines(file_data)
 
 
