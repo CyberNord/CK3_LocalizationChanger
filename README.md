@@ -18,6 +18,7 @@ Before Starting make sure the following libraries are installed.
 - [Python 3.1](https://www.python.org/download/releases/3.1/)
 - [googletrans 4.0.0rc1](https://libraries.io/pypi/googletrans)
 - [PyYAML](https://pypi.org/project/PyYAML/)
+
 While higher versions of Python may work, its important to use the googletrans version 4.0.0rc1 (or higher) older versions will cause the the Program to throw an error.
 
 #### First Steps
