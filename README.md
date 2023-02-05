@@ -29,7 +29,7 @@ The default setting is translating from english to german and it will look like 
   python main.py D:\the\path\to\english\loc\folder
 ```
 
-#### Detail
+### Usage
 Below you can see the general Syntax 
 
 ```bash
@@ -46,3 +46,26 @@ Optional information
 - **[-l2 L2]**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired output language (default = de)
 - **[-trans TRANS]**&nbsp;&nbsp;(default = 1) If this value is set to 0 there will be no translation. The Programm wil only convert the files to the disired output language so that it is supported by the game (e.g. results in english text in german localisation)
 
+#### More examples
+
+this will translate from english (default) to french
+```bash
+python main.py -l2 fr D:\the\path\to\english\loc\folder
+```
+this will translate from french to german (default)
+```bash
+python main.py -l1 fr D:\the\path\to\english\loc\folder
+```
+
+this will just alter the first line and filename so that the localisation is detected by the game
+```bash
+python main.py -trans 0 D:\the\path\to\english\loc\folder
+```
+#### Language codes
+- 'en' english
+- 'de' german
+- 'fr' french
+- 'es' spanish
+- 'jp' japanese
+
+To find further language codes look at the [googleTrans API documentation](https://py-googletrans.readthedocs.io/en/latest/)
