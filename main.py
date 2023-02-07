@@ -6,12 +6,28 @@ import re
 from googletrans import Translator
 
 # ---------------------------------------------------
-PATTERN = "english"
-REPLACE_WITH = "german"
+DEBUG = False
 translator = Translator()
 RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
 REPLACER = '{@}'
 # ---------------------------------------------------
+
+
+def get_loc_code(from_l: bool, pars_arg: str):
+    locale_codes = {
+        'en': 'english',
+        'de': 'german',
+        'fr': 'french',
+        'es': 'spanish',
+        'ru': 'russian',
+        'zh-cn': 'simp_chinese',
+        'ko': 'korean'
+    }
+    locale = locale_codes.get(pars_arg)
+    if not locale:
+        locale = 'english' if from_l else 'german'
+    return locale
+
 
 def parseargs():
     parser = argparse.ArgumentParser()
@@ -21,8 +37,11 @@ def parseargs():
     parser.add_argument("path")
 
     args = parser.parse_args()
-    fromlanguage = args.l1
-    tolanguage = args.l2
+    from_language = args.l1
+    to_language = args.l2
+    from_naming = get_loc_code(True, from_language)
+    to_naming = get_loc_code(False, to_language)
+
     if args.trans == 1:
         do_translation = True
     else:
@@ -32,10 +51,10 @@ def parseargs():
     if not target_dir.exists():
         print("The target directory doesn't exist")
         raise SystemExit(1)
-    init(target_dir, do_translation, fromlanguage, tolanguage)
+    init(target_dir, do_translation, from_language, to_language, from_naming, to_naming)
 
 
-def init(target_dir, do_translation, fromlanguage, tolanguage):
+def init(target_dir, do_translation, from_language, to_language, from_naming, to_naming):
     INPUT_DIR = target_dir
     print("INPUT_DIR " + INPUT_DIR.__str__())
 
@@ -45,24 +64,22 @@ def init(target_dir, do_translation, fromlanguage, tolanguage):
     for file in list(INPUT_DIR.rglob("*.yml*")):
         filepath = os.path.dirname(os.path.abspath(file))
         filename = file.name.split('/')[0]
-        newfileName = filename.replace(PATTERN, REPLACE_WITH)
+        newfileName = filename.replace(from_naming, to_naming)
 
         # replace text in file
         with open(file, 'r', encoding="utf-8") as f_r:
             print("current File: " + file.name)
             file_data = f_r.readlines()
-            # file_data = yaml.safe_load(f_r)
-            file_data[0] = file_data[0].replace(PATTERN, REPLACE_WITH)
+            file_data[0] = file_data[0].replace(from_naming, to_naming)
             if do_translation:
-                translate(file_data, totalCount, fromlanguage, tolanguage)
+                translate(file_data, totalCount, from_language, to_language)
+            tofile(filepath, filename, file_data, from_naming, to_naming)
 
-            tofile(filepath, filename, file_data)
 
-
-def tofile(filepath, filename, file_data):
+def tofile(filepath, filename, file_data, from_naming, to_naming):
     old_file = os.path.join(filepath, filename)
-    newfileName = filename.replace(PATTERN, REPLACE_WITH, 1)
-    new_filepath = filepath.replace(PATTERN, REPLACE_WITH, 1)
+    newfileName = filename.replace(from_naming, to_naming, 1)
+    new_filepath = filepath.replace(from_naming, to_naming, 1)
     new_file = os.path.join(new_filepath, newfileName)
 
     new_path = Path(new_file)
@@ -73,18 +90,15 @@ def tofile(filepath, filename, file_data):
         f_r.writelines(file_data)
 
 
-def translate(file_data, totalCount, fromlanguage, tolanguage):
+def translate(file_data, totalCount, from_language, to_language):
     #  basic Translator in work
     for i, lines in enumerate(file_data[1:]):
         matches = re.findall('"([^"]*)"', lines)
-        print(matches)
         if len(matches) == 1 and matches is not None:
             tokens = re.findall(RE_PATTERN, matches[0])
-            print(tokens)
 
             match = matches[0]
             matches[0] = re.sub(RE_PATTERN, REPLACER, matches[0])
-            print(matches)
 
             # timeout is needed otherwise api will block usage
             print("Timeout API.")
@@ -95,19 +109,27 @@ def translate(file_data, totalCount, fromlanguage, tolanguage):
 
             # translate
             try:
-                translation = translator.translate(matches[0], dest=tolanguage, src=fromlanguage)
+                translation = translator.translate(matches[0], dest=to_language, src=from_language)
                 padded_translation = translation.text
             except TypeError:
                 translation = matches[0]
                 padded_translation = matches[0]
-                print('Error Skiped in: ' + matches[0])
+                print('Error (TypeError) Skipped in: ' + matches[0])
+            except TimeoutError:
+                translation = matches[0]
+                padded_translation = matches[0]
+                print('Error (TimeOut) Skipped in: ' + matches[0])
             totalCount += 1
 
-            print(padded_translation)
+            if DEBUG:
+                print(padded_translation)
+
             for t in tokens:
                 padded_translation = padded_translation.replace(REPLACER, t, 1)
 
-            print(padded_translation)
+            if DEBUG:
+                print(padded_translation)
+
             file_data[i + 1] = lines.replace(match, padded_translation, 1)
             print(file_data[i + 1])
             print("#" + str(totalCount))
