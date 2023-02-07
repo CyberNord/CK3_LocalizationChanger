@@ -1,13 +1,12 @@
 
 # ck3-Translator
 
-This Project allows the user to automatically translate ck3 (crusader kings 3) localisation files to other languages supported by the game and the translator API.
-
+This Project allows the user to automatically translate ck3 (Crusader Kings 3) localisation files to other languages supported by the game and the translator API.
 
 ## Authors
 
 - [@CyberNord](https://github.com/CyberNord)
-- [@Martin220799](https://github.com/Martin220799)
+- [@Martin220799](https://github.com/Martin220799)    (Powershell Controls) 
 
 
 ## Installation
@@ -61,11 +60,11 @@ this will just alter the first line and filename so that the localisation is det
 ```bash
 python main.py -trans 0 D:\the\path\to\english\loc\folder
 ```
-#### Language codes
+#### Supported languages 
+The list is limited by the possible localisation of CK3.
 - 'en' english
 - 'de' german
 - 'fr' french
 - 'es' spanish
-- 'jp' japanese
-
-To find further language codes look at the [googleTrans API documentation](https://py-googletrans.readthedocs.io/en/latest/)
+- 'zh-cn' simplified chinese
+- 'ko' korean
