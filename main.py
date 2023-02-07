@@ -7,6 +7,7 @@ from googletrans import Translator
 
 # ---------------------------------------------------
 DEBUG = False
+INFO = False
 translator = Translator()
 RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
 REPLACER = '{@}'
@@ -68,6 +69,7 @@ def init(target_dir, do_translation, from_language, to_language, from_naming, to
 
         # replace text in file
         with open(file, 'r', encoding="utf-8") as f_r:
+            print('----------------------------------------------')
             print("current File: " + file.name)
             file_data = f_r.readlines()
             file_data[0] = file_data[0].replace(from_naming, to_naming)
@@ -101,12 +103,14 @@ def translate(file_data, totalCount, from_language, to_language):
             matches[0] = re.sub(RE_PATTERN, REPLACER, matches[0])
 
             # timeout is needed otherwise api will block usage
-            print("Timeout API.")
-            for j in range(2, 0, -1):
-                print(j, end="...")
-                time.sleep(1)
-            print("resuming")
-
+            if DEBUG:
+                print("Timeout API.")
+                for j in range(2, 0, -1):
+                    print(j, end="...")
+                    time.sleep(1)
+                print("resuming")
+            else:
+                time.sleep(2)
             # translate
             try:
                 translation = translator.translate(matches[0], dest=to_language, src=from_language)
@@ -119,6 +123,10 @@ def translate(file_data, totalCount, from_language, to_language):
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Error (TimeOut) Skipped in: ' + matches[0])
+            except:
+                translation = matches[0]
+                padded_translation = matches[0]
+                print('Unknown Exception - Skipped in' + matches[0])
             totalCount += 1
 
             if DEBUG:
@@ -131,8 +139,9 @@ def translate(file_data, totalCount, from_language, to_language):
                 print(padded_translation)
 
             file_data[i + 1] = lines.replace(match, padded_translation, 1)
-            print(file_data[i + 1])
-            print("#" + str(totalCount))
+            if INFO:
+                print(file_data[i + 1])
+            print("line no. #" + str(totalCount), end="")
         print()
 
 
