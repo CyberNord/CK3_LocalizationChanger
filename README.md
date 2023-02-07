@@ -34,16 +34,24 @@ Below you can see the general Syntax
 ```bash
 python main.py [-h] [-l1 L1] [-l2 L2] [-trans TRANS] path
 ```
-
 The following parts are mandatory
  - **python main.py**&nbsp;&nbsp;&nbsp;&nbsp;call of the programm
  - **path**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path to the folder to be translated
- 
+
 Optional information
 - **[-h]**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no function for now
 - **[-l1 L1]**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;given input language (default = en)
 - **[-l2 L2]**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desired output language (default = de)
 - **[-trans TRANS]**&nbsp;&nbsp;(default = 1) If this value is set to 0 there will be no translation. The Programm wil only convert the files to the disired output language so that it is supported by the game (e.g. results in english text in german localisation)
+
+#### Supported languages 
+The list is limited by the possible localisations supported in CK3.
+- 'en' english
+- 'de' german
+- 'fr' french
+- 'es' spanish
+- 'zh-cn' simplified chinese
+- 'ko' korean
 
 #### More examples
 
@@ -60,11 +68,3 @@ this will just alter the first line and filename so that the localisation is det
 ```bash
 python main.py -trans 0 D:\the\path\to\english\loc\folder
 ```
-#### Supported languages 
-The list is limited by the possible localisation of CK3.
-- 'en' english
-- 'de' german
-- 'fr' french
-- 'es' spanish
-- 'zh-cn' simplified chinese
-- 'ko' korean
