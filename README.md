@@ -3,6 +3,10 @@
 
 This Project allows the user to automatically translate ck3 (Crusader Kings 3) localisation files to other languages supported by the game and the translator API.
 
+**ATTENTION!**
+**This project is pretty new and there might be some cornercases I haven't adressed yet**
+**If you find a Bug please let me know and provide the files to reproduce the Error**
+
 ## Authors
 
 - [@CyberNord](https://github.com/CyberNord)
