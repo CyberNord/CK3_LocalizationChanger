@@ -1,0 +1,14 @@
+﻿l_english:
+
+ # Nivkh
+ Atvuk:0 "Atvuk"
+ Azmun:0 "Azmun"
+ Azrun:0 "Azrun"
+ Chalun:0 "Chalun"
+ Changin:0 "Changin"
+ Chuner:0 "Chuner"
+ Ezdanok:0 "Ezdanok"
+ historicinvasion_debug_decision_desc:0 "A decision visibly only in Debug Mode to test out event or decision requirements.\n\nComplete to dismiss."
+ hi_end_bugged_mongol_empire_story_decision_desc:0 "The vanilla Mongol Invasion story seems to have bugged out in your game:\n\nThe $e_mongol_empire$ still exists and has de jure land even after the global variable that indicates the end of the story line has been set.\nUsually, the $e_mongol_empire$ is supposed be splintered into titles like the $e_ilkhanate$, $e_golden_horde$ and $e_mongolia$. Since the $e_mongol_empire$ still exists in your game, the surrounding AI rulers automatically swear fealty to the emperor via decision every 12 months and later revolt - ad nauseam.\n\nThis endless loop can be fixed by swapping out the $e_mongol_empire$ with $e_mongolia$."
+ hi_end_bugged_mongol_empire_story_decision_confirm:0 "Confirm"
+ global_hi_mongol_empire_has_de_jure_land_text:0 "The $e_mongol_empire$ posesses [de_jure|El] land"

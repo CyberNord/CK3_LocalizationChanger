@@ -96,6 +96,7 @@ def translate(file_data, totalCount, from_language, to_language):
     #  basic Translator in work
     for i, lines in enumerate(file_data[1:]):
         matches = re.findall('"([^"]*)"', lines)
+        # matches = re.findall(r'"(.*?)"', lines)
         if len(matches) == 1 and matches is not None:
             tokens = re.findall(RE_PATTERN, matches[0])
 
@@ -138,7 +139,8 @@ def translate(file_data, totalCount, from_language, to_language):
             if DEBUG:
                 print(padded_translation)
 
-            file_data[i + 1] = lines.replace(match, padded_translation, 1)
+            file_data[i + 1] = lines.replace("\"" + match + "\"", "\"" + padded_translation + "\"", 1)
+            print(match + " <- " + padded_translation)
             if INFO:
                 print(file_data[i + 1])
             print("line no. #" + str(totalCount), end="")
