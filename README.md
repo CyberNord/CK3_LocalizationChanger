@@ -3,6 +3,10 @@
 
 This Project allows the user to automatically translate ck3 (Crusader Kings 3) localisation files to other languages supported by the game and the translator API.
 
+**ATTENTION!**
+**This project is pretty new and there might be some cornercases I haven't adressed yet**
+**If you find a Bug please let me know and provide the files to reproduce the Error**
+
 ## Authors
 
 - [@CyberNord](https://github.com/CyberNord)
@@ -68,3 +72,15 @@ this will just alter the first line and filename so that the localisation is det
 ```bash
 python main.py -trans 0 D:\the\path\to\english\loc\folder
 ```
+## FAQ
+
+#### Why is this taking so long? 
+
+A 2 second timeout was implemented after each translation cycle.
+This had to be done because the current API does not currently accept a mass request and, in extreme cases, completely blocks further requests.
+
+#### Why are some lines not translated at all? 
+
+The API has problems translating certain sentences or very long strings correctly.
+In order to avoid complete crap, the default language is retained in such cases.
+Especially translations from English into Spanish are very prone to this.
