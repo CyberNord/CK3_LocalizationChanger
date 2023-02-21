@@ -140,9 +140,8 @@ def translate(file_data, totalCount, from_language, to_language):
                 print(padded_translation)
 
             file_data[i + 1] = lines.replace("\"" + match + "\"", "\"" + padded_translation + "\"", 1)
-            print(match + " <- " + padded_translation)
             if INFO:
-                print(file_data[i + 1])
+                print(match + " <- " + padded_translation)
             print("line no. #" + str(totalCount), end="")
         print()
 
