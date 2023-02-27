@@ -1,3 +1,4 @@
+import datetime
 import time
 import argparse
 from pathlib import Path
@@ -11,6 +12,8 @@ INFO = False
 translator = Translator()
 RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
 REPLACER = '{@}'
+LINE_STR = '-----------------------------------------'
+
 # ---------------------------------------------------
 
 
@@ -52,7 +55,22 @@ def parseargs():
     if not target_dir.exists():
         print("The target directory doesn't exist")
         raise SystemExit(1)
+    log_message(
+        LINE_STR + "\nNew Translation " + from_language + " --> " + to_language + "\n" + LINE_STR,
+        False)
     init(target_dir, do_translation, from_language, to_language, from_naming, to_naming)
+
+
+def log_message(message, sign_t=True):
+    log_file = "error_log.txt"
+    if not os.path.exists(log_file):
+        open(log_file, "w").close()
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(log_file, "a") as file:
+        if sign_t:
+            file.write("[{}] {}\n".format(timestamp, message))
+        else:
+            file.write("{}\n".format(message))
 
 
 def init(target_dir, do_translation, from_language, to_language, from_naming, to_naming):
@@ -69,8 +87,10 @@ def init(target_dir, do_translation, from_language, to_language, from_naming, to
 
         # replace text in file
         with open(file, 'r', encoding="utf-8") as f_r:
-            print('----------------------------------------------')
+            print(LINE_STR)
             print("current File: " + file.name)
+            log_message("\n" + file.name, False)
+
             file_data = f_r.readlines()
             file_data[0] = file_data[0].replace(from_naming, to_naming)
             if do_translation:
@@ -96,7 +116,6 @@ def translate(file_data, totalCount, from_language, to_language):
     #  basic Translator in work
     for i, lines in enumerate(file_data[1:]):
         matches = re.findall('"([^"]*)"', lines)
-        # matches = re.findall(r'"(.*?)"', lines)
         if len(matches) == 1 and matches is not None:
             tokens = re.findall(RE_PATTERN, matches[0])
 
@@ -120,14 +139,18 @@ def translate(file_data, totalCount, from_language, to_language):
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Error (TypeError) Skipped in: ' + matches[0])
+                log_message("Translator TypeError in line #" + totalCount + " : " + matches[0])
             except TimeoutError:
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Error (TimeOut) Skipped in: ' + matches[0])
+                log_message("Translator TimeOut in line #" + totalCount + " : " + matches[0])
             except:
+                # no optimal solution
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Unknown Exception - Skipped in' + matches[0])
+                log_message("Unknown Exception in line #" + totalCount + " : " + matches[0])
             totalCount += 1
 
             if DEBUG:
