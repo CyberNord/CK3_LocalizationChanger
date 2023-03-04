@@ -83,3 +83,10 @@ This had to be done because the current API does not currently accept a mass req
 The API has problems translating certain sentences or very long strings correctly.
 In order to avoid complete crap, the default language is retained in such cases.
 Especially translations from English into Spanish are very prone to this.
+
+
+#### Will this translator work for other iterations of the pdx genere? 
+
+Some tests were made with the "Stellaris" localization files, which turned out to be satisfactory on the whole.
+I strongly assume that most of the titles are compatible since the syntax is similar or even identical.
+So yes, you can probably use this translator for "Stellaris" or other titles from the developer Paradox.
