@@ -13,9 +13,7 @@ translator = Translator()
 RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
 REPLACER = '{@}'
 LINE_STR = '-----------------------------------------'
-
 # ---------------------------------------------------
-
 
 def get_loc_code(from_l: bool, pars_arg: str):
     locale_codes = {
@@ -116,7 +114,7 @@ def translate(file_data, totalCount, from_language, to_language):
     #  basic Translator in work
     for i, lines in enumerate(file_data[1:]):
         matches = re.findall('"([^"]*)"', lines)
-        if len(matches) == 1 and matches is not None:
+        if len(matches) == 1 and matches[0] != '' and matches is not None:
             tokens = re.findall(RE_PATTERN, matches[0])
 
             match = matches[0]

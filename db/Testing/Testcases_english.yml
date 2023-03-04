@@ -1,5 +1,14 @@
 ﻿l_english:
 
+###############
+### Civics, Origins and General Mod Localisations
+##############
+
+ origin_frontier_world:0 "Frontier World"
+ origin_frontier_world_desc:0 ""
+ origin_tooltip_frontier_world:0 "Frontier life"
+ 
+ 
  # Nivkh
  Atvuk:0 "Atvuk"
  Azmun:0 "Azmun"
