@@ -18,7 +18,7 @@ This Project allows the user to automatically translate ck3 (Crusader Kings 3) l
 #### Requirements
 Before Starting make sure the following libraries are installed. 
 
-- [Python 3.1](https://www.python.org/download/releases/3.1/)
+- [Python 3.1](https://www.python.org/download/releases/3.1/) (or higher)
 - [googletrans 4.0.0rc1](https://libraries.io/pypi/googletrans)
 
 While higher versions of Python may work, its important to use the googletrans version 4.0.0rc1 (or higher) older versions will cause the the Program to throw an error.
