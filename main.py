@@ -137,18 +137,18 @@ def translate(file_data, totalCount, from_language, to_language):
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Error (TypeError) Skipped in: ' + matches[0])
-                log_message("Translator TypeError in line #" + totalCount + " : " + matches[0])
+                log_message("Translator TypeError in line #" + str(totalCount) + " : " + matches[0])
             except TimeoutError:
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Error (TimeOut) Skipped in: ' + matches[0])
-                log_message("Translator TimeOut in line #" + totalCount + " : " + matches[0])
+                log_message("Translator TimeOut in line #" + str(totalCount) + " : " + matches[0])
             except:
                 # no optimal solution
                 translation = matches[0]
                 padded_translation = matches[0]
                 print('Unknown Exception - Skipped in' + matches[0])
-                log_message("Unknown Exception in line #" + totalCount + " : " + matches[0])
+                log_message("Unknown Exception in line #" + str(totalCount) + " : " + matches[0])
             totalCount += 1
 
             if DEBUG:
