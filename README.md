@@ -18,10 +18,10 @@ This Project allows the user to automatically translate ck3 (Crusader Kings 3) l
 #### Requirements
 Before Starting make sure the following libraries are installed. 
 
-- [Python 3.1](https://www.python.org/download/releases/3.1/) (or higher)
+- [Python 3.10](https://www.python.org/downloads/) (or higher)
 - [googletrans 4.0.0rc1](https://libraries.io/pypi/googletrans)
 
-While higher versions of Python may work, its important to use the googletrans version 4.0.0rc1 (or higher) older versions will cause the the Program to throw an error.
+It is important to use the googletrans version 4.0.0rc1 (or higher) older versions will cause the the Program to throw an error.
 
 #### First Steps
 Download the project folder from github and unpack it in a Location of your desire. Start a command prompt (e.g. PowerShell) in the path where the main.py is located. 
@@ -83,3 +83,10 @@ This had to be done because the current API does not currently accept a mass req
 The API has problems translating certain sentences or very long strings correctly.
 In order to avoid complete crap, the default language is retained in such cases.
 Especially translations from English into Spanish are very prone to this.
+
+
+#### Will this translator work for other iterations of the pdx genere? 
+
+Some tests were made with the "Stellaris" localization files, which turned out to be satisfactory on the whole.
+I strongly assume that most of the titles are compatible since the syntax is similar or even identical.
+So yes, you can probably use this translator for "Stellaris" or other titles from the developer Paradox.
