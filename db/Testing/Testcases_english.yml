@@ -8,6 +8,10 @@
  origin_frontier_world_desc:0 ""
  origin_tooltip_frontier_world:0 "Frontier life"
  
+ hth_mint_coins_glory_effect_tt_2:0 "You will be able to trade @prestige_icon! [prestige|E] for @gold_icon! [gold|E]"
+ hth_consult_the_archives_effect_tt_2:0 "You will be able to trade @piety_icon!
+ HTH_REQUIREMENT_PREQ_NAME_ERUDITION_2:0 "\n#S Legacy Requirements:#! Have at least (25) @skill_learning_icon! [learning|e]\n#help This is a condition that has to be met before this dynasty legacy can be attained.#!"
+ 
  
  # Nivkh
  Atvuk:0 "Atvuk"
@@ -21,3 +25,4 @@
  hi_end_bugged_mongol_empire_story_decision_desc:0 "The vanilla Mongol Invasion story seems to have bugged out in your game:\n\nThe $e_mongol_empire$ still exists and has de jure land even after the global variable that indicates the end of the story line has been set.\nUsually, the $e_mongol_empire$ is supposed be splintered into titles like the $e_ilkhanate$, $e_golden_horde$ and $e_mongolia$. Since the $e_mongol_empire$ still exists in your game, the surrounding AI rulers automatically swear fealty to the emperor via decision every 12 months and later revolt - ad nauseam.\n\nThis endless loop can be fixed by swapping out the $e_mongol_empire$ with $e_mongolia$."
  hi_end_bugged_mongol_empire_story_decision_confirm:0 "Confirm"
  global_hi_mongol_empire_has_de_jure_land_text:0 "The $e_mongol_empire$ posesses [de_jure|El] land"
+ 

@@ -10,7 +10,7 @@ from googletrans import Translator
 DEBUG = False
 INFO = False
 translator = Translator()
-RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n')
+RE_PATTERN = re.compile(r'\[[^"\]]*]|\$[^$]+\$|#[^$]+#|\\n|@[^!]+!')
 REPLACER = '{@}'
 LINE_STR = '-----------------------------------------'
 # ---------------------------------------------------
