@@ -53,6 +53,7 @@ The list is limited by the possible localisations supported in CK3.
 - 'de' german
 - 'fr' french
 - 'es' spanish
+- 'ru' russian
 - 'zh-cn' simplified chinese
 - 'ko' korean
 
