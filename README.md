@@ -93,8 +93,8 @@ I strongly assume that most of the titles are compatible since the syntax is sim
 So yes, you can probably use this translator for "Stellaris" or other titles from the developer Paradox.
 
 #### What kind of Syntax is currently supported in the translation files?
- - Square Bracket Content: Text enclosed in square brackets, including the brackets themselves. For example, [example] would be filtered.
- - Dollar Sign Enclosed Text: Text enclosed between dollar signs ($), including the dollar signs themselves. For example, $example$ would be filtered. 
- - Hashtag Enclosed Text: Text enclosed between hashtags (#), including the hashtags themselves. For example, #example# would be filtered. 
- - Newline Sequence: The newline character \n, which represents a line break in a text. 
- - @-Prefixed Text: Text that starts with @ and ends with an exclamation mark (!). For example, @example! would be filtered.
+ - Square Bracket Content: Text enclosed in square brackets, including the brackets themselves. For example, `[example]` would be filtered.
+ - Dollar Sign Enclosed Text: Text enclosed between dollar signs ($), including the dollar signs themselves. For example, `$example$` would be filtered. 
+ - Hashtag Enclosed Text: Text enclosed between hashtags (#), including the hashtags themselves. For example, `#example#` would be filtered. 
+ - Newline Sequence: The newline character `\n`, which represents a line break in a text. 
+ - @-Prefixed Text: Text that starts with @ and ends with an exclamation mark (!). For example, `@example!` would be filtered.
