@@ -7,10 +7,9 @@ This Project allows the user to automatically translate ck3 (Crusader Kings 3) l
 **This project is pretty new and there might be some cornercases I haven't adressed yet**
 **If you find a Bug please let me know and provide the files to reproduce the Error**
 
-## Authors
+## Tip-jar
 
-- [@CyberNord](https://github.com/CyberNord)
-- [@Martin220799](https://github.com/Martin220799)    (Powershell Controls) 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E81QTC2X)
 
 
 ## Installation
